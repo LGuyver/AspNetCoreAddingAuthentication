@@ -50,6 +50,13 @@ namespace WishList.Controllers
             return RedirectToAction ("Index", "Home");
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -65,7 +72,7 @@ namespace WishList.Controllers
                 ModelState.AddModelError(string.Empty,"Invalid login attempt.");
                 return View(model);
             }
-            return RedirectToAction("Item", "Index");
+            return RedirectToAction("Index", "Item");
         }
 
         [HttpPost]
@@ -73,7 +80,7 @@ namespace WishList.Controllers
         public IActionResult Logout()
         {
             _signInManager.SignOutAsync();
-            return RedirectToAction("Home", "Index");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
